@@ -9,6 +9,33 @@
 
 <!-- styles -->
 <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+<style>
+    .ul {
+        list-style-type: none; 
+        background-color: #dddddd;
+    }
+
+    li {
+        display: inline;
+        padding: 8px;
+        float: left;
+        background-color: #dddddd;
+        border-right: 1px solid #bbb;
+    }
+    li a {
+        display: block;
+        color: white;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+    }
+    li:last-child {
+        border-right: none;
+    }
+    li a:hover {
+        background-color: #111;
+    }
+</style>
 
 <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
 <!--[if lt IE 9]>
@@ -25,22 +52,24 @@
 <div class="container">
 
     <nav style="display: flex; margin-top: 1.5rem ; margin-bottom: 1.5rem;">
-        <ul>
-            <a href="{% url 'quiz_index' %} ">Quiz Home</a>
-        </ul>
+        <ul style="list-style-type: none; display: inline;">
+            <li>
+                <a href="{% url 'quiz_index' %} ">Quiz Home</a>
+            </li>
 
         {% if user.is_authenticated %}
-            <ul>
+            <li>
                 Hello {{ user.username }}
-            </ul>
-            <ul>
+            </li>
+            <li>
                 <a href="{% url 'logout' %}">Logout</a>
-            </ul>
+            </li>
         {% else %}
-            <ul>
+            <li>
                 <a href="{% url 'login' %} ">Login</a> 
-            </ul>
+            </li>
         {% endif %}
+        </ul>
     </nav>
 
 {% block content %}
