@@ -24,6 +24,25 @@
 
 <div class="container">
 
+    <nav style="display: flex; margin-top: 1.5rem ; margin-bottom: 1.5rem;">
+        <ul>
+            <a href="{% url 'quiz_index' %} ">Quiz Home</a>
+        </ul>
+
+        {% if user.is_authenticated %}
+            <ul>
+                Hello {{ user.username }}
+            </ul>
+            <ul>
+                <a href="{% url 'logout' %}">Logout</a>
+            </ul>
+        {% else %}
+            <ul>
+                <a href="{% url 'login' %} ">Login</a> 
+            </ul>
+        {% endif %}
+    </nav>
+
 {% block content %}
 
 {% endblock %}

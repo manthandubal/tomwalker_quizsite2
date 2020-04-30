@@ -18,9 +18,19 @@ class EssayForm(forms.Form):
             widget=Textarea(attrs={'style': 'width:100%'}))
 
 
-class UserForm(forms.ModelForm):
-	password = forms.CharField(widget=forms.PasswordInput)
+class UserRegistrationForm(forms.ModelForm):
+    password = forms.CharField(widget=forms.PasswordInput)
 
-	class Meta:
-		model = User
-		fields = [ 'username', 'email', 'password']
+    class Meta:
+        model = User
+        fields = [ 'username', 'email', 'password']
+
+
+class UserLoginForm(forms.Form):
+	# password = forms.CharField(widget=forms.PasswordInput)
+    username = forms.CharField(widget=forms.TextInput(attrs={'class':'form-control','placeholder':'User Name'}))
+    password = forms.CharField(widget=forms.PasswordInput(attrs={'class':'form-control','placeholder':'Password'}))
+
+    class Meta:
+        model = User
+        fields = [ 'username', 'password']

@@ -8,10 +8,13 @@ from .forms import QuestionForm, EssayForm
 from .models import Quiz, Category, Progress, Sitting, Question, SubCategory
 from essay.models import Essay_Question
 from django.shortcuts import redirect
+from django.http import HttpResponseRedirect
+from django.urls import reverse
 from django.contrib.auth import authenticate, login, logout
 from django.views import generic
 from django.views.generic import View
-from .forms import UserForm
+from django.contrib.auth.models import User
+from .forms import UserRegistrationForm, UserLoginForm
 from rest_framework.response import Response
 # from rest_framework import status
 # from rest_framework import viewsets
@@ -157,7 +160,7 @@ class QuizTake(FormView):
             raise PermissionDenied
 
         try:
-            self.logged_in_user = self.request.user.is_authenticated()
+            self.logged_in_user = self.request.user.is_authenticated
         except TypeError:
             self.logged_in_user = self.request.user.is_authenticated
 
@@ -399,9 +402,9 @@ def anon_session_score(session, to_add=0, possible=0):
 
 
 
-class UserFormView(View):
-    form_class = UserForm
-    template_name = 'quiz/login.html'
+class UserRegistrationFormView(View):
+    form_class = UserRegistrationForm
+    template_name = 'quiz/register.html'
     
     def get(self, request):
         form = self.form_class(None)
@@ -435,6 +438,38 @@ class UserFormView(View):
         
         return render(request, self.template_name, {'form':form})
 
+class UserLoginFormView(View):
+    form_class = UserLoginForm
+    template_name = 'quiz/login.html'
+    
+    def get(self, request):
+        form = self.form_class(None)
+        return render(request, self.template_name, {'form':form})
+    
+    #Process Form data as per data entered
+    def post(self, request):
+        form = self.form_class(request.POST)
+        
+        if form.is_valid():
+            
+            #Cleaned Normalised data
+            username = form.cleaned_data['username']
+            password = form.cleaned_data['password']
+
+            #Authenticate User            
+            user = authenticate(username = username, password = password)
+
+            if user is not None:
+                if user.is_active:
+                    login(request, user)
+                    return redirect('quiz_index')
+                
+        return render(request, self.template_name, {'form':form})
+
+class UserLogoutView(View):
+    def get(self, request):
+        logout(request)
+        return redirect('login')
 
 class QuizList(APIView):
     def get(self, request):

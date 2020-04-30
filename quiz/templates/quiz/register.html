@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block title %} Register for Quiz App {% endblock %}
+
+{% block description %} Create User Account {% endblock %}
+
+{% block content %}
+
+ <!-- <h1>Create User Account</h1> -->
+ <form name="userForm" method="post" action=""> 
+ 	{% csrf_token %}
+ 	{% if form %}
+ 		
+ 	<table>
+ 		{{ form }}
+ 	</table>
+ 	{% else %}
+ 		<h1>Could not find anything.. Sorry!!</h1>
+ 	{% endif %}
+ 	<input type="submit" value="Register">
+ </form>
+
+
+ {% endblock %}

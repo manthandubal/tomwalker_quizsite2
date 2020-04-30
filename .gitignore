@@ -4,12 +4,11 @@
 #*#
 sqlite.db
 db.sqlite3
-/mysite*
+/quizsite/settings.py
 /uploads/
 .tox
 *.egg
 .project
 .pydevproject
-quiz/media/*
 quiz/uploads/*
-quizsite/settings.py
+quiz/media/*
