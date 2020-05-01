@@ -11,7 +11,7 @@ from .views import QuizListView, CategoriesListView, \
     ViewQuizListByCategory, QuizUserProgressView, QuizMarkingList, \
     QuizMarkingDetail, QuizDetailView, QuizTake, QuizList, \
     QuestionList, CategoryList, ProgressList, MarkingList, SubCategoryList, \
-    UserRegistrationFormView, UserLoginFormView, UserLogoutView
+    UserRegistrationFormView, UserLoginFormView, UserLogoutView, ContinueQuizTake
 
 # app_name = 'quiz'
 
@@ -50,8 +50,10 @@ urlpatterns = [
     #  passes variable 'quiz_name' to quiz_take view
     path('<slug>/', QuizDetailView.as_view(), name='quiz_start_page'),
 
+	path('<slug:quiz_name>/take/<int:pk>/', ContinueQuizTake.as_view(), name='continue_quiz_question'),
+
     path('<slug:quiz_name>/take/', QuizTake.as_view(), name='quiz_question'),
-    
+	
 ]
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

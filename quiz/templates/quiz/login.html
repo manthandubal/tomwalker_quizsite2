@@ -10,13 +10,13 @@
  	{% csrf_token %}
  	{% if form %}
  		
- 	<table>
+ 	<table class="table">
  		{{ form }}
  	</table>
  	{% else %}
  		<h1>Could not find anything.. Sorry!!</h1>
  	{% endif %}
-	 <input type="submit" value="Login">
+	 <input type="submit" value="Login" class="btn btn-success">
 	 <h5><a href="{% url 'register' %} ">Not a User? Sign up here</a></h5>
  </form>
 

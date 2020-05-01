@@ -83,4 +83,52 @@
   {% endif %}
 
 
+{% if incomplete_exams %}
+
+  <hr>
+
+  <h1>{% trans "Previous Incomplete exam papers" %}</h1>
+  <p class="lead">
+	{% trans "Below are the list of Incomplete exams that you have sat." %}
+  </p>
+
+  <table class="table table-bordered table-striped">
+
+	<thead>
+	  <tr>
+		<th>{% trans "Quiz Title" %}</th>
+		<th>{% trans "Score" %}</th>
+		<th>{% trans "Possible Score" %}</th>
+		<th>%</th>
+		<th></th>
+	  </tr>
+	</thead>
+
+	<tbody>
+
+	  {% for exam in incomplete_exams %}
+
+	  <tr>
+		<td>{{ exam.quiz.title }}</td>
+		<td>{{ exam.current_score }}</td>
+		<td>{{ exam.get_max_score }}</td>
+		<td>{{ exam.get_percent_correct }}</td>
+		<td>
+			{% if exam.complete == False %}
+				<a href="{% url 'continue_quiz_question' quiz_name=exam.quiz.url pk=exam.id %}"> Continue exam </a>
+			{% else %}
+				Completed
+			{% endif %}
+		</td>
+	  </tr>
+
+	  {% endfor %}
+
+	</tbody>
+
+  </table>
+
+  {% endif %}
+
+
 {% endblock %}

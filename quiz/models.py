@@ -306,6 +306,13 @@ class Progress(models.Model):
         """
         return Sitting.objects.filter(user=self.user, complete=True)
 
+    def show_incomplete_exams(self):
+        """
+        Finds the previous quizzes marked as 'exam papers'.
+        Returns a queryset of complete exams.
+        """
+        return Sitting.objects.filter(user=self.user, complete=False)
+
 
 class SittingManager(models.Manager):
 
