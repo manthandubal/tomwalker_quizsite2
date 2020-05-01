@@ -33,7 +33,7 @@ urlpatterns = [
 
     path('category/list/', CategoryList.as_view(), name='category_list'),
 
-    path('category/<str:category_name>/list/', SubCategoryList.as_view(), name='category_list'),
+    path('category/<str:category_name>/list/', SubCategoryList.as_view(), name='sub_category_list'),
 
     path('<slug:quiz_name>/list/', QuestionList.as_view(), name='question_list'),
 
