@@ -1,0 +1,118 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Django quiz app &#8212; Django Quiz App 0.1.0 documentation</title>
+    <link rel="stylesheet" href="_static/haiku.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="quiz.templatetags package" href="quiz.templatetags.html" /> 
+  </head><body>
+      <div class="header" role="banner"><h1 class="heading"><a href="index.html">
+          <span>Django Quiz App 0.1.0 documentation</span></a></h1>
+        <h2 class="heading"><span>Django quiz app</span></h2>
+      </div>
+      <div class="topnav" role="navigation" aria-label="top navigation">
+      
+        <p>
+        «&#160;&#160;<a href="quiz.templatetags.html">quiz.templatetags package</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        </p>
+
+      </div>
+      <div class="content" role="main">
+        
+        
+  <div class="section" id="django-quiz-app">
+<h1>Django quiz app<a class="headerlink" href="#django-quiz-app" title="Permalink to this headline">¶</a></h1>
+<p>This is a configurable quiz app for Django.</p>
+<div class="section" id="current-features">
+<h2>Current features<a class="headerlink" href="#current-features" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Question order randomisation</p></li>
+<li><p>Storing of quiz results under each user</p></li>
+<li><p>Previous quiz scores can be viewed on category page</p></li>
+<li><p>Correct answers can be shown after each question or all at once at the end</p></li>
+<li><p>Logged in users can return to an incomplete quiz to finish it and non-logged in users can complete a quiz if their session persists</p></li>
+<li><p>The quiz can be limited to one attempt per user</p></li>
+<li><p>Questions can be given a category</p></li>
+<li><p>Success rate for each category can be monitored on a progress page</p></li>
+<li><p>Explanation for each question result can be given</p></li>
+<li><p>Pass marks can be set</p></li>
+<li><p>Multiple choice question type</p></li>
+<li><p>True/False question type</p></li>
+<li><p>Essay question type</p></li>
+<li><p>Custom message displayed for those that pass or fail a quiz</p></li>
+<li><p>Custom permission (view_sittings) added, allowing users with that permission to view quiz results from users</p></li>
+<li><p>A marking page which lists completed quizzes, can be filtered by quiz or user, and is used to mark essay questions</p></li>
+<li><p>REST API call available for the functionality. To access just add /list at end in URL.</p></li>
+</ul>
+</div>
+<div class="section" id="requirements">
+<h2>Requirements<a class="headerlink" href="#requirements" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>django-model-utils</p></li>
+<li><p>django version &gt;= 2.2</p></li>
+</ul>
+</div>
+<div class="section" id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>git clone <a class="reference external" href="https://github.com/manthandubal/tomwalker_quizsite2.git">https://github.com/manthandubal/tomwalker_quizsite2.git</a></p>
+<p>pip install -r requirements.txt</p>
+</div></blockquote>
+<p>Add ‘rest_framework’,’quiz’, ‘multichoice’, ‘true_false’, and ‘essay’ to your ‘INSTALLED_APPS’ setting.</p>
+<blockquote>
+<div><p>INSTALLED_APPS = (</p>
+<blockquote>
+<div><p>…
+‘rest_framework’,
+‘quiz’,
+‘multichoice’,
+‘true_false’,
+…</p>
+</div></blockquote>
+<p>)</p>
+</div></blockquote>
+<p>Add the following to your projects ‘urls.py’ file, substituting ‘q’
+for whatever you want the quiz base url to be.</p>
+<blockquote>
+<div><dl class="simple">
+<dt>urlpatterns = patterns(‘’,</dt><dd><p>…
+path(‘quiz/’, include(‘quiz.urls’)),
+path(‘register/’, view=UserFormView.as_view(), name=’register’),
+…</p>
+</dd>
+</dl>
+<p>)</p>
+</div></blockquote>
+</div>
+</div>
+
+
+      </div>
+      <div class="bottomnav" role="navigation" aria-label="bottom navigation">
+      
+        <p>
+        «&#160;&#160;<a href="quiz.templatetags.html">quiz.templatetags package</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        </p>
+
+      </div>
+
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2020, Tomwalker, Manthan Dubal.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.0.3.
+    </div>
+  </body>
+</html>

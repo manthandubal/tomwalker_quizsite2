@@ -1,3 +1,13 @@
+""""
+This module allows to edit and setup Quiz for all the users. 
+This module allows admin to do changes to below mentioned tables.
+    Quiz, Question, Multichoice Question, Essay Question, True / False Question, Answer of Question, Category,
+    Sub Category.
+
+    This table pops up on admin login via /admin URL.
+"""
+__docformat__ = 'reStructuredText'
+
 from django import forms
 from django.contrib import admin
 from django.contrib.admin.widgets import FilteredSelectMultiple

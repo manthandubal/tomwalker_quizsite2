@@ -15,6 +15,11 @@ from django.conf import settings
 from model_utils.managers import InheritanceManager
 
 
+
+"""
+CategoryManager model allows to replace space in category name  with - before saving it. 
+Also it changes text to lower case before saving.
+"""
 class CategoryManager(models.Manager):
 
     def new_category(self, category):
@@ -24,6 +29,12 @@ class CategoryManager(models.Manager):
         new_category.save()
         return new_category
 
+
+"""
+Category model allows to create category table with category field as CharField. 
+Maximum length allowed here is 250 characters. Also is specifies that column can hold only unique values.
+It returns category name if object is called.
+"""
 
 @python_2_unicode_compatible
 class Category(models.Model):
@@ -46,6 +57,12 @@ class Category(models.Model):
         return self.category
 
 
+"""
+SubCategory model allows to create SubCategory table with sub_category field as CharField. 
+Maximum length allowed here is 250 characters. It also takes category id as foreign key for reference.
+It returns sub_category + (categor_name) as String if object is called. 
+"""
+
 @python_2_unicode_compatible
 class SubCategory(models.Model):
 
@@ -66,6 +83,30 @@ class SubCategory(models.Model):
     def __str__(self):
         return self.sub_category + " (" + self.category.category + ")"
 
+
+
+"""
+Quiz model allows to create Quiz table with below inputs.
+
+Fields:
+
+title as CharField where max_length=60 and blank=False.
+description as TextField where blank=True.
+url as SlugField where max_length=60 and blank=False.
+category id as ForeignKey Category table where null=True, blank=True, verbose_name=_("Category"), on_delete=models.CASCADE)
+random_order as BooleanField where blank=False, default=False, verbose_name=_("Random Order"), help_text=_("Display the questions in a random order or as they are set?")
+max_questions as PositiveIntegerField where blank=True, null=True, verbose_name=_("Max Questions"), help_text=_("Number of questions to be answered on each attempt.")
+answers_at_end as BooleanField where blank=False, default=False, help_text=_("Correct answer is NOT shown after question. Answers displayed at the end."), verbose_name=_("Answers at end")
+exam_paper as BooleanField where blank=False, default=False, help_text=_("If yes, the result of each attempt by a user will be stored. Necessary for marking."), verbose_name=_("Exam Paper")
+single_attempt as models.BooleanField where blank=False, default=False, help_text=_("If yes, only one attempt by a user will be permitted. Non users cannot sit this exam."), verbose_name=_("Single Attempt")
+pass_mark as models.SmallIntegerField where blank=True, default=0, verbose_name=_("Pass Mark"), help_text=_("Percentage required to pass exam."), validators=[MaxValueValidator(100)]
+success_text as models.TextField where blank=True, help_text=_("Displayed if user passes."), verbose_name=_("Success Text")
+fail_text as models.TextField where verbose_name=_("Fail Text"), blank=True, help_text=_("Displayed if user fails.") 
+draft as models.BooleanField where blank=True, default=False, verbose_name=_("Draft"), help_text=_("If yes, the quiz is not displayed in the quiz list and can only be taken by users who can edit quizzes.")
+
+Maximum length allowed here is 250 characters. It also takes category id as foreign key for reference.
+It returns title of Quiz as String if object is called. 
+"""
 
 @python_2_unicode_compatible
 class Quiz(models.Model):
